@@ -1,2 +1,4 @@
-package datamodel;public class ToDoItem {
+package datamodel;
+
+public class ToDoItem {
 }

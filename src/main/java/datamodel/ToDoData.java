@@ -31,9 +31,9 @@ public class ToDoData {
         return toDoItems;
     }
 
-    public void setToDoItems(List<ToDoItem> toDoItems) {
-        this.toDoItems = toDoItems;
-    }
+//    public void setToDoItems(List<ToDoItem> toDoItems) {
+//        this.toDoItems = toDoItems;
+//    }
 
     public void loadToDoItems() throws IOException {
         toDoItems = FXCollections.observableArrayList();
@@ -45,7 +45,8 @@ public class ToDoData {
                 String shortDescription = stringPieces[0];
                 String details = stringPieces[1];
                 String date = stringPieces[2];
-                LocalDate dueDate = LocalDate.parse(date, formatter);
+                LocalDate dueDate = LocalDate.parse(date);
+//                LocalDate.parse(date, formatter);
                 ToDoItem item = new ToDoItem(shortDescription, details, dueDate);
                 toDoItems.add(item);
             }

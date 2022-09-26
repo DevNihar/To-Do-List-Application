@@ -27,6 +27,15 @@ public class Main extends Application {
         }
     }
 
+    @Override
+    public void init() throws Exception {
+        try{
+            ToDoData.getInstance().loadToDoItems();
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         launch();
     }

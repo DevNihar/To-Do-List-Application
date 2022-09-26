@@ -1,5 +1,6 @@
 package com.nihar_raut.todolist;
 
+import datamodel.ToDoData;
 import datamodel.ToDoItem;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -10,6 +11,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
@@ -45,6 +47,7 @@ public class HelloController {
         toDoItems.add(item4);
         toDoItems.add(item5);
 
+        ToDoData.getInstance().setToDoItems(toDoItems);
         toDoListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ToDoItem>() {
             @Override
             public void changed(ObservableValue<? extends ToDoItem> observableValue, ToDoItem toDoItem, ToDoItem t1) {

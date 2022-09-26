@@ -1,5 +1,6 @@
 package com.nihar_raut.todolist;
 
+import datamodel.ToDoData;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,6 +16,15 @@ public class HelloApplication extends Application {
         stage.setTitle("ToDo List");
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        try{
+            ToDoData.getInstance().saveToDOItems();
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void main(String[] args) {

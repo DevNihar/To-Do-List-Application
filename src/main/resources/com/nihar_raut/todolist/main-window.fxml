@@ -14,12 +14,12 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.nihar_raut.todolist.Controller">
     <top>
-        <MenuBar style="-fx-background-color: #40739e">
-            <Menu text="File" style="-fx-background-color: #40739e; -fx-text-fill: #dcdde1">
+        <MenuBar>
+            <Menu text="File">
                 <items >
-                    <MenuItem text="New" style="-fx-background-color: #40739e; -fx-text-fill: #dcdde1"/>
+                    <MenuItem text="New"/>
                     <SeparatorMenuItem/>
-                    <MenuItem text="Exit" style="-fx-background-color: #40739e; -fx-text-fill: #dcdde1"/>
+                    <MenuItem text="Exit"/>
                 </items>
             </Menu>
         </MenuBar>
@@ -28,15 +28,15 @@
         <ListView fx:id = "toDoListView" />
     </left>
     <center>
-        <VBox style="-fx-background-color: #40739e">
-            <TextArea fx:id="itemsDetailsTextArea" VBox.vgrow="ALWAYS" style="-fx-background-color: #718093"/>
-            <HBox style="-fx-background-color: #40739e">
-                <Label text="Due: " style="-fx-background-color: #40739e; -fx-text-fill: #dcdde1">
+        <VBox style="-fx-background-color: white">
+            <TextArea fx:id="itemsDetailsTextArea" VBox.vgrow="ALWAYS"/>
+            <HBox>
+                <Label text="Due: " style="-fx-background-color: white">
                     <font>
                         <Font name="Times New Roman bold" size="20"/>
                     </font>
                 </Label>
-                <Label fx:id="deadLine" style="-fx-background-color: #40739e; -fx-text-fill: #dcdde1">
+                <Label fx:id="deadLine" style="-fx-background-color: white">
                     <font>
                         <Font name="Times New Roman bold" size="20"/>
                     </font>

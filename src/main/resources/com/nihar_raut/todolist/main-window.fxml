@@ -5,6 +5,8 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.nihar_raut.todolist.HelloController">
     <left>
@@ -13,14 +15,20 @@
         </ListView>
     </left>
     <center>
-        <TextArea fx:id="itemsDetailsTextArea">
-
-        </TextArea>
-    </center>
-    <bottom>
         <VBox fx:id="detailsTab" >
-            <Label fx:id="deadLine"/>
+            <TextArea fx:id="itemsDetailsTextArea" VBox.vgrow="ALWAYS"/>
+            <HBox>
+                <Label text="Due: ">
+                    <font>
+                        <Font name="Times New Roman bold" size="20"/>
+                    </font>
+                </Label>
+                <Label fx:id="deadLine">
+                    <font>
+                        <Font name="Times New Roman bold" size="20"/>
+                    </font>
+                </Label>
+            </HBox>
         </VBox>
-    </bottom>
-
+    </center>
 </BorderPane>

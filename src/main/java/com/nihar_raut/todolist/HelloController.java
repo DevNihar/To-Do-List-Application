@@ -23,7 +23,6 @@ public class HelloController {
     @FXML
     private Label deadLine;
 
-
     public void initialize(){
         ToDoItem item1 = new ToDoItem("TCP Practical", "Attend TCP/IP Practical",
                 LocalDate.of(2022, Month.SEPTEMBER, 26));
@@ -50,8 +49,6 @@ public class HelloController {
     public void handleClickListView(){
         ToDoItem selectedItem = toDoListView.getSelectionModel().getSelectedItem();
         itemsDetailsTextArea.setText(selectedItem.getDetails());
-        StringBuilder sb = new StringBuilder("Dead Line: ");
-        sb.append(selectedItem.getDeadLine());
-        deadLine.setText(sb.toString());
+        deadLine.setText(selectedItem.getDeadLine().toString());
     }
 }

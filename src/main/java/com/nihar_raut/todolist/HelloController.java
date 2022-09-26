@@ -2,9 +2,11 @@ package com.nihar_raut.todolist;
 
 import datamodel.ToDoItem;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.VBox;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -18,6 +20,8 @@ public class HelloController {
     private ListView<ToDoItem> toDoListView;
     @FXML
     private TextArea itemsDetailsTextArea;
+    @FXML
+    private Label deadLine;
 
 
     public void initialize(){
@@ -46,6 +50,8 @@ public class HelloController {
     public void handleClickListView(){
         ToDoItem selectedItem = toDoListView.getSelectionModel().getSelectedItem();
         itemsDetailsTextArea.setText(selectedItem.getDetails());
+        StringBuilder sb = new StringBuilder("Dead Line: ");
+        sb.append(selectedItem.getDeadLine());
+        deadLine.setText(sb.toString());
     }
-
 }

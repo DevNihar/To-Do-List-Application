@@ -5,16 +5,19 @@ import datamodel.ToDoItem;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextArea;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Controller {
     @FXML
@@ -23,6 +26,8 @@ public class Controller {
     private TextArea itemsDetailsTextArea;
     @FXML
     private Label deadLine;
+    @FXML
+    private BorderPane mainBorderPane;
 
     public void initialize(){
 //        ToDoItem item1 = new ToDoItem("TCP Practical", "Attend TCP/IP Practical",
@@ -56,5 +61,29 @@ public class Controller {
         toDoListView.getItems().setAll(ToDoData.getInstance().getToDoItems());
         toDoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         toDoListView.getSelectionModel().selectFirst();
+    }
+
+    @FXML
+    public void showNewItemDialog(){
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(mainBorderPane.getScene().getWindow());
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("toDoItemDialog.fxml"));
+        try {
+            fxmlLoader.load();
+        }catch (IOException e){
+            System.out.println("Couldn't load dialog");
+        }
+        Node root = fxmlLoader.getRoot();
+        dialog.getDialogPane().setContent(root);
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        Optional<ButtonType> result = dialog.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK){
+            System.out.println("OK Pressed");
+        }else {
+            System.out.println("Cancel Pressed");
+        }
     }
 }

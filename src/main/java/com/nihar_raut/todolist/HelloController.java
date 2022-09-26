@@ -3,6 +3,8 @@ package com.nihar_raut.todolist;
 import datamodel.ToDoItem;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -12,7 +14,11 @@ import java.util.List;
 public class HelloController {
     private List<ToDoItem> toDoItems;
 
-    public void initialise(){
+    @FXML
+    private ListView toDoListView;
+
+
+    public void initialize(){
         ToDoItem item1 = new ToDoItem("TCP Practical", "Attend TCP/IP Practical",
                 LocalDate.of(2022, Month.SEPTEMBER, 26));
         ToDoItem item2 = new ToDoItem("Amazon Package", "Receive the amazon package",
@@ -31,6 +37,8 @@ public class HelloController {
         toDoItems.add(item4);
         toDoItems.add(item5);
 
+        toDoListView.getItems().setAll(toDoItems);
+        toDoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 
 }

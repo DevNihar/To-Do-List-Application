@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +50,8 @@ public class HelloController {
             public void changed(ObservableValue<? extends ToDoItem> observableValue, ToDoItem toDoItem, ToDoItem t1) {
                 ToDoItem item = toDoListView.getSelectionModel().getSelectedItem();
                 itemsDetailsTextArea.setText(item.getDetails());
-                deadLine.setText(item.getDeadLine().toString());
+                DateTimeFormatter df = DateTimeFormatter.ofPattern("MMMM d, yyyy");
+                deadLine.setText(df.format(item.getDeadLine()));
             }
         });
         toDoListView.getItems().setAll(toDoItems);

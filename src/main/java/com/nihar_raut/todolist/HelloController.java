@@ -15,7 +15,7 @@ public class HelloController {
     private List<ToDoItem> toDoItems;
 
     @FXML
-    private ListView toDoListView;
+    private ListView<ToDoItem> toDoListView;
     @FXML
     private TextArea itemsDetailsTextArea;
 
@@ -44,7 +44,7 @@ public class HelloController {
     }
     @FXML
     public void handleClickListView(){
-        ToDoItem selectedItem = (ToDoItem) toDoListView.getSelectionModel().getSelectedItem();
+        ToDoItem selectedItem = toDoListView.getSelectionModel().getSelectedItem();
         itemsDetailsTextArea.setText(selectedItem.getDetails());
     }
 

@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextArea;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -16,6 +17,8 @@ public class HelloController {
 
     @FXML
     private ListView toDoListView;
+    @FXML
+    private TextArea toDoListTextArea;
 
 
     public void initialize(){
@@ -39,6 +42,11 @@ public class HelloController {
 
         toDoListView.getItems().setAll(toDoItems);
         toDoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+    }
+    @FXML
+    public void handleClickListView(){
+        ToDoItem selectedItem = (ToDoItem) toDoListView.getSelectionModel().getSelectedItem();
+        toDoListTextArea.setText(selectedItem.getDetails());
     }
 
 }

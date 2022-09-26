@@ -10,9 +10,7 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.nihar_raut.todolist.HelloController">
     <left>
-        <ListView fx:id = "toDoListView" onMouseClicked="#handleClickListView">
-
-        </ListView>
+        <ListView fx:id = "toDoListView"/>
     </left>
     <center>
         <VBox style="-fx-background-color: white">

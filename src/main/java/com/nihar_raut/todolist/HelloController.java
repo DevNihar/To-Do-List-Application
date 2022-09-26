@@ -1,6 +1,8 @@
 package com.nihar_raut.todolist;
 
 import datamodel.ToDoItem;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -42,13 +44,16 @@ public class HelloController {
         toDoItems.add(item4);
         toDoItems.add(item5);
 
+        toDoListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ToDoItem>() {
+            @Override
+            public void changed(ObservableValue<? extends ToDoItem> observableValue, ToDoItem toDoItem, ToDoItem t1) {
+                ToDoItem item = toDoListView.getSelectionModel().getSelectedItem();
+                itemsDetailsTextArea.setText(item.getDetails());
+                deadLine.setText(item.getDeadLine().toString());
+            }
+        });
         toDoListView.getItems().setAll(toDoItems);
         toDoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-    }
-    @FXML
-    public void handleClickListView(){
-        ToDoItem selectedItem = toDoListView.getSelectionModel().getSelectedItem();
-        itemsDetailsTextArea.setText(selectedItem.getDetails());
-        deadLine.setText(selectedItem.getDeadLine().toString());
+        toDoListView.getSelectionModel().selectFirst();
     }
 }

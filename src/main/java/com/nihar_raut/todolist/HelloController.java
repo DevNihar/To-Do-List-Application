@@ -2,7 +2,6 @@ package com.nihar_raut.todolist;
 
 import datamodel.ToDoItem;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
@@ -18,7 +17,7 @@ public class HelloController {
     @FXML
     private ListView toDoListView;
     @FXML
-    private TextArea toDoListTextArea;
+    private TextArea itemsDetailsTextArea;
 
 
     public void initialize(){
@@ -46,7 +45,7 @@ public class HelloController {
     @FXML
     public void handleClickListView(){
         ToDoItem selectedItem = (ToDoItem) toDoListView.getSelectionModel().getSelectedItem();
-        toDoListTextArea.setText(selectedItem.getDetails());
+        itemsDetailsTextArea.setText(selectedItem.getDetails());
     }
 
 }

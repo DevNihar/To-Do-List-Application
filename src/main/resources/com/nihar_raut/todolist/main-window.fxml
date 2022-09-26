@@ -11,7 +11,7 @@
         </ListView>
     </left>
     <center>
-        <TextArea fx:id="toDoListTextArea">
+        <TextArea fx:id="itemsDetailsTextArea">
 
         </TextArea>
     </center>

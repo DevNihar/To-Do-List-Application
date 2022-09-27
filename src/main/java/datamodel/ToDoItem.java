@@ -36,9 +36,9 @@ public class ToDoItem {
     public void setDeadLine(LocalDate deadLine) {
         this.deadLine = deadLine;
     }
-
-    @Override
-    public String toString() {
-        return this.shortDescription;
-    }
+//  No longer needed since the short description is updated in the cell factory
+//    @Override
+//    public String toString() {
+//        return this.shortDescription;
+//    }
 }

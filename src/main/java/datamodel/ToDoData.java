@@ -70,7 +70,11 @@ public class ToDoData {
         }
     }
 
-
+    public void addToDoItems(ToDoItem item){
+        if(item != null){
+            toDoItems.add(item);
+        }
+    }
 
 
 

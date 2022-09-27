@@ -87,9 +87,6 @@ public class Controller {
             ToDoItem newItem = controller.processData();
 //            toDoListView.getItems().setAll(ToDoData.getInstance().getToDoItems());
             toDoListView.getSelectionModel().select(newItem);
-            System.out.println("OK Pressed");
-        } else {
-            System.out.println("Cancel Pressed");
         }
     }
 }

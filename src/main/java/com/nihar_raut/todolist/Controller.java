@@ -67,14 +67,15 @@ public class Controller {
     public void showNewItemDialog(){
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(mainBorderPane.getScene().getWindow());
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("toDoItemDialog.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("toDoItemDialog.fxml"));
         try {
-            fxmlLoader.load();
+            dialog.getDialogPane().setContent(fxmlLoader.load());
         }catch (IOException e){
             System.out.println("Couldn't load dialog");
         }
-        Node root = fxmlLoader.getRoot();
-        dialog.getDialogPane().setContent(root);
+
+
 
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
         dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);

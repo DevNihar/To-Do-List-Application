@@ -76,7 +76,9 @@ public class ToDoData {
         }
     }
 
-
+    public void deleteListItem(ToDoItem item){
+        toDoItems.remove(item);
+    }
 
 
 

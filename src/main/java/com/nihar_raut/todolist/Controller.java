@@ -4,6 +4,8 @@ import datamodel.ToDoData;
 import datamodel.ToDoItem;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -25,6 +27,8 @@ public class Controller {
     private Label deadLine;
     @FXML
     private BorderPane mainBorderPane;
+    @FXML
+    private ContextMenu listContextMenu;
 
     public void initialize() {
 //        ToDoItem item1 = new ToDoItem("TCP Practical", "Attend TCP/IP Practical",
@@ -46,6 +50,16 @@ public class Controller {
 //        toDoItems.add(item5);
 //
 //        ToDoData.getInstance().setToDoItems(toDoItems);
+        listContextMenu = new ContextMenu();
+        MenuItem deleteMenuItem = new MenuItem("Delete");
+        deleteMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ToDoItem item = toDoListView.getSelectionModel().getSelectedItem();
+                deleteItem(item);
+            }
+        });
+        listContextMenu.getItems().addAll(deleteMenuItem);
         toDoListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ToDoItem>() {
             @Override
             public void changed(ObservableValue<? extends ToDoItem> observableValue, ToDoItem toDoItem, ToDoItem t1) {
@@ -85,6 +99,15 @@ public class Controller {
                         }
                     }
                 };
+                cell.emptyProperty().addListener(
+                        (obs, wasEmpty, isNowEmpty)->{
+                            if(isNowEmpty){
+                                cell.setContextMenu(null);
+                            }else {
+                                cell.setContextMenu(listContextMenu);
+                            }
+                        }
+                );
                 return cell;
             }
         });
@@ -113,6 +136,16 @@ public class Controller {
             ToDoItem newItem = controller.processData();
 //            toDoListView.getItems().setAll(ToDoData.getInstance().getToDoItems());
             toDoListView.getSelectionModel().select(newItem);
+        }
+    }
+    public void deleteItem(ToDoItem item){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete To Do Item");
+        alert.setHeaderText("Delete item " + item.getShortDescription());
+        alert.setContentText("Are you sure ? Press Ok to confirm and Cancel to back out");
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent() && result.get().equals(ButtonType.OK)){
+            ToDoData.getInstance().deleteListItem(item);
         }
     }
 }

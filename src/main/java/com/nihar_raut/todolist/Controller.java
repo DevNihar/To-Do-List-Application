@@ -4,6 +4,7 @@ import datamodel.ToDoData;
 import datamodel.ToDoItem;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import javafx.util.Callback;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.Optional;
 
 public class Controller {
@@ -77,7 +79,16 @@ public class Controller {
 
             }
         });
-        toDoListView.setItems(ToDoData.getInstance().getToDoItems());
+
+        SortedList<ToDoItem> sortedList = new SortedList<>(ToDoData.getInstance().getToDoItems(),
+                new Comparator<ToDoItem>() {
+                    @Override
+                    public int compare(ToDoItem o1, ToDoItem o2) {
+                        return o1.getDeadLine().compareTo(o2.getDeadLine());
+                    }
+                });
+
+        toDoListView.setItems(sortedList);
         toDoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         toDoListView.getSelectionModel().selectFirst();
         toDoListView.setCellFactory(new Callback<ListView<ToDoItem>, ListCell<ToDoItem>>() {

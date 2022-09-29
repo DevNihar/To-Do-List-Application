@@ -2,3 +2,6 @@ TCP Practical	Attend TCP/IP Practical	2022-09-26
 Amazon Package	Receive the amazon package	2022-09-29
 Project	Finish the Escape Project until	2022-10-10
 Java Course	Finish learning the java course	2022-10-15
+Test1	This is Test 1	2022-09-01
+Test 2	This is test 2	2022-10-27
+Test 3	Thsi is Test 3	2022-09-29

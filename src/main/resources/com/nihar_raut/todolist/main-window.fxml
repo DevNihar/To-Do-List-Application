@@ -2,56 +2,57 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<?import org.kordamp.ikonli.javafx.FontIcon ?>
-<BorderPane fx:id="mainBorderPane" xmlns:fx="http://javafx.com/fxml"
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<BorderPane fx:id="mainBorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea"
             fx:controller="com.nihar_raut.todolist.Controller">
     <top>
         <VBox>
             <MenuBar>
                 <Menu text="File">
-                    <items >
-                        <MenuItem text="New" onAction="#showNewItemDialog"/>
-                        <SeparatorMenuItem/>
-                        <MenuItem text="Exit" onAction="#handleExit"/>
+                    <items>
+                        <MenuItem onAction="#showNewItemDialog" text="New" />
+                        <SeparatorMenuItem />
+                        <MenuItem onAction="#handleExit" text="Exit" />
                     </items>
                 </Menu>
             </MenuBar>
             <HBox>
                 <Button onAction="#showNewItemDialog">
                     <tooltip>
-                        <Tooltip text="Add a new item"/>
+                        <Tooltip text="Add a new item" />
                     </tooltip>
                     <graphic>
-                        <FontIcon iconLiteral="bi-clipboard-plus" iconSize="15"/>
+                        <FontIcon iconLiteral="bi-clipboard-plus" iconSize="15" />
                     </graphic>
                 </Button>
                 <ToggleButton fx:id="filterToggleButton" onAction="#handleFilterButton">
                     <tooltip>
-                        <Tooltip text="Show today's Items"/>
+                        <Tooltip text="Show today's Items" />
                     </tooltip>
                     <graphic>
-                        <FontIcon iconLiteral="bi-clock" iconSize="15"/>
+                        <FontIcon iconLiteral="bi-clock" iconSize="15" />
                     </graphic>
                 </ToggleButton>
             </HBox>
         </VBox>
     </top>
     <left>
-        <ListView fx:id = "toDoListView" onKeyPressed="#handleKeyPressed"/>
+        <ListView fx:id="toDoListView" onKeyPressed="#handleKeyPressed" />
     </left>
     <center>
         <VBox style="-fx-background-color: white">
-            <TextArea fx:id="itemsDetailsTextArea" WrapText="true" VBox.vgrow="ALWAYS"/>
+            <TextArea fx:id="itemsDetailsTextArea" WrapText="true" VBox.vgrow="ALWAYS" />
             <HBox>
-                <Label text="Due: " style="-fx-background-color: white">
+                <Label style="-fx-background-color: white" text="Due: ">
                     <font>
-                        <Font name="Times New Roman bold" size="20"/>
+                        <Font name="Times New Roman bold" size="20" />
                     </font>
                 </Label>
                 <Label fx:id="deadLine" style="-fx-background-color: white">
                     <font>
-                        <Font name="Times New Roman bold" size="20"/>
+                        <Font name="Times New Roman bold" size="20" />
                     </font>
                 </Label>
             </HBox>

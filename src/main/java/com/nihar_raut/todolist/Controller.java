@@ -4,6 +4,7 @@ import datamodel.ToDoData;
 import datamodel.ToDoItem;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,6 +22,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class Controller {
     @FXML
@@ -33,6 +35,13 @@ public class Controller {
     private BorderPane mainBorderPane;
     @FXML
     private ContextMenu listContextMenu;
+    @FXML
+    private ToggleButton filterToggleButton;
+
+    private FilteredList<ToDoItem> filteredList;
+
+    private Predicate<ToDoItem> wantAllItems;
+    private Predicate<ToDoItem> wantTodaysItem;
 
     public void initialize() {
 //        ToDoItem item1 = new ToDoItem("TCP Practical", "Attend TCP/IP Practical",
@@ -68,19 +77,31 @@ public class Controller {
             @Override
             public void changed(ObservableValue<? extends ToDoItem> observableValue, ToDoItem toDoItem, ToDoItem t1) {
                 ToDoItem item = toDoListView.getSelectionModel().getSelectedItem();
-               try{
-                    itemsDetailsTextArea.setText(item.getDetails());
-                    DateTimeFormatter df = DateTimeFormatter.ofPattern("MMMM d, yyyy");
-                    deadLine.setText(df.format(item.getDeadLine()));
-                }catch (NullPointerException e){
-                   System.out.println("The Item is null");
-                   System.out.println(e.getMessage());
-                }
-
+               if(item != null) {
+                   itemsDetailsTextArea.setText(item.getDetails());
+                   DateTimeFormatter df = DateTimeFormatter.ofPattern("MMMM d, yyyy");
+                   deadLine.setText(df.format(item.getDeadLine()));
+               }
             }
         });
 
-        SortedList<ToDoItem> sortedList = new SortedList<>(ToDoData.getInstance().getToDoItems(),
+        wantAllItems = new Predicate<ToDoItem>() {
+            @Override
+            public boolean test(ToDoItem item) {
+                return true;
+            }
+        };
+
+        wantTodaysItem = new Predicate<ToDoItem>() {
+            @Override
+            public boolean test(ToDoItem item) {
+                return (item.getDeadLine().isEqual(LocalDate.now()));
+            }
+        };
+
+        filteredList = new FilteredList<>(ToDoData.getInstance().getToDoItems(), wantAllItems);
+
+        SortedList<ToDoItem> sortedList = new SortedList<>(filteredList,
                 new Comparator<ToDoItem>() {
                     @Override
                     public int compare(ToDoItem o1, ToDoItem o2) {
@@ -168,6 +189,25 @@ public class Controller {
             if(keyEvent.getCode().equals(KeyCode.DELETE)){
                 deleteItem(selectedItem);
             }
+        }
+    }
+
+    @FXML
+    public void handleFilterButton(){
+        ToDoItem selectedItem = toDoListView.getSelectionModel().getSelectedItem();
+        if(filterToggleButton.isSelected()){
+            filteredList.setPredicate(wantTodaysItem);
+            if(filteredList.isEmpty()){
+                itemsDetailsTextArea.clear();
+                deadLine.setText("");
+            } else if (filteredList.contains(selectedItem)) {
+                toDoListView.getSelectionModel().select(selectedItem);
+            }else {
+                toDoListView.getSelectionModel().selectFirst();
+            }
+        }else {
+            filteredList.setPredicate(wantAllItems);
+            toDoListView.getSelectionModel().select(selectedItem);
         }
     }
 }

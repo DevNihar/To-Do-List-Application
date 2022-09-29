@@ -26,6 +26,14 @@
                         <FontIcon iconLiteral="bi-clipboard-plus" iconSize="15"/>
                     </graphic>
                 </Button>
+                <ToggleButton fx:id="filterToggleButton" onAction="#handleFilterButton">
+                    <tooltip>
+                        <Tooltip text="Show today's Items"/>
+                    </tooltip>
+                    <graphic>
+                        <FontIcon iconLiteral="bi-clock" iconSize="15"/>
+                    </graphic>
+                </ToggleButton>
             </HBox>
         </VBox>
     </top>
